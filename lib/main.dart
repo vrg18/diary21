@@ -1,6 +1,10 @@
 import 'dart:io';
 
 import 'package:device_preview/device_preview.dart';
+import 'package:diary/domain/user.dart';
+import 'package:diary/ui/res/strings.dart';
+import 'package:diary/ui/res/theme.dart';
+import 'package:diary/ui/screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +14,12 @@ main() => runApp(
         devices: [Devices.android.samsungS8],
         defaultDevice: Devices.android.samsungS8,
         isToolbarVisible: true,
-        builder: (_) => MyApp(),
+        builder: (_) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider<User>(create: (_) => User()),
+          ],
+          child: MyApp(),
+        ),
       ),
     );
 
@@ -37,6 +46,7 @@ class MyApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       title: appTitle,
+      theme: mainTheme,
       home: LoginScreen(),
     );
   }
