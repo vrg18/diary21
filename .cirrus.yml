@@ -1,0 +1,14 @@
+container:
+  image: cirrusci/flutter:beta
+
+#test_task:
+#  pub_cache:
+#    folder: ~/.pub-cache
+#  test_script: flutter test
+
+build_task:
+  build_script:
+    - flutter config --enable-web
+    - flutter build web --no-sound-null-safety --release
+  binaries_artifacts:
+    path: "build/web/**"
