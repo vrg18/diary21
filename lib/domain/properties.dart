@@ -6,3 +6,4 @@ const String urlAuth = '$url:3001';
 const String signIn = '/signin';
 const String signUp = '/signup';
 const String affairsDB = '/affairs';
+

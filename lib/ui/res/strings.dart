@@ -5,3 +5,4 @@ const String greetingString = 'Ваш персональный Ежедневн�
 const String loginHint = 'Логин (E-mail)';
 const String passwordHint = 'Пароль';
 const String loginPress = 'Вход';
+const String loginGooglePress = 'Вход с Google';
