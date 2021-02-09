@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 
 final mainTheme = ThemeData(
   primaryColor: primaryAppColor,
-//  accentColor: primaryAppColor,
-scaffoldBackgroundColor: secondaryBackgroundColor,
+  accentColor: Colors.indigo,
+  scaffoldBackgroundColor: primaryBackgroundColor,
   backgroundColor: primaryBackgroundColor,
+  primarySwatch: Colors.indigo,
   buttonTheme: ButtonThemeData(
     buttonColor: appButtonColor,
     textTheme: ButtonTextTheme.primary,

@@ -11,14 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^4.3.3
-  device_preview: ^0.6.2-beta
+  flutter_localizations:
+    sdk: flutter
+
+  provider: ^5.0.0-nullsafety.3
   dio: ^3.0.10
   google_sign_in: ^4.5.9
-  flutter_calendar_week:
-    git:
-      url: https://github.com/mduccc/flutter_calendar_week
-      ref: 0.1.0
+  table_calendar: ^2.3.3
 
 dev_dependencies:
   flutter_test:

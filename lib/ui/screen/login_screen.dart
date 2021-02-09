@@ -1,6 +1,7 @@
 import 'package:diary/data/repository/current_user.dart';
 import 'package:diary/ui/res/colors.dart';
 import 'package:diary/ui/res/strings.dart';
+import 'package:diary/ui/screen/calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -76,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               } else {
                                 _showMessage(context, loginAndPassEmpty);
                               }
-                              _showMessage(context, _currentUser.user.email);
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => Calendar()));
                             },
                           ),
                           const SizedBox(height: 20),
@@ -86,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               setState(() => (_isLoading = true));
                               String error = await _currentUser.googleLogin();
                               if (error.isNotEmpty) _showMessage(context, error);
-                              _showMessage(context, _currentUser.user.email);
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => Calendar()));
                             },
                           ),
                           const SizedBox(height: 10),
