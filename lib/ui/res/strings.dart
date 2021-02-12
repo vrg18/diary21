@@ -12,3 +12,6 @@ const String loginAndPassEmpty = 'E-mail и пароль должны быть �
 const String loginEmpty = 'E-mail должн быть заполнен';
 const String mailCheckRequest = 'Вам отправлен запрос на подтверждение E-mail, проверьте почту';
 const String passwordResetRequest = 'Вам отправлен запрос на сброс пароля, проверьте почту';
+const String weekTitle = 'Неделя';
+const String twoWeeksTitle = '2 недели';
+const String monthTitle = 'Месяц';

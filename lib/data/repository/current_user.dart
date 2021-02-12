@@ -4,7 +4,7 @@ import 'package:diary/ui/res/strings.dart';
 import 'package:dio/dio.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-/// Класс, хранящий текущего пользователя
+/// Бизнес-логика и запись/чтение в/из БД сущьности Пользователь
 /// Используется Provider
 class CurrentUser {
   late User _user;
@@ -16,7 +16,7 @@ class CurrentUser {
     ],
   );
 
-  User get user => _user;
+  get user => _user;
 
   Future<String> login(String email, String password) async {
     try {
@@ -89,20 +89,20 @@ class CurrentUser {
     if (response.statusCode < 300) {
       if (isLogin) {
         _user = User(
-          response.data['user']['email'],
           response.data['user']['id'],
+          response.data['user']['email'],
           response.data['token'],
         );
       }
       return '';
     } else {
-      print('Сообщение: ${response.statusMessage}');
+//      print('Сообщение: ${response.statusMessage}');
       return response.statusMessage;
     }
   }
 
   _authContinueException(error) {
-    print('Ошибка: $error');
+//    print('Ошибка: $error');
     if (error is DioError) {
       if (error.response.data.containsKey('message')) {
         return error.response.data['message'];

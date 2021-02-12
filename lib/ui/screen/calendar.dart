@@ -1,5 +1,8 @@
+import 'package:diary/data/repository/current_day.dart';
 import 'package:diary/data/repository/current_user.dart';
 import 'package:diary/ui/res/sizes.dart';
+import 'package:diary/ui/res/strings.dart';
+import 'package:diary/ui/screen/hour_strip.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -11,11 +14,13 @@ class Calendar extends StatefulWidget {
 
 class _CalendarState extends State<Calendar> {
   late CalendarController _calendarController;
+  late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
     _calendarController = CalendarController();
+    _scrollController = ScrollController(initialScrollOffset: startingOffsetOfListOfHourStripes);
   }
 
   @override
@@ -32,21 +37,31 @@ class _CalendarState extends State<Calendar> {
         title: Align(
           alignment: Alignment.centerRight,
           child: Text(
-            'grig1e@mail.ru',
+            Provider.of<CurrentUser>(context, listen: false).user.email,
             style: TextStyle(fontSize: 12),
           ),
         ),
         toolbarHeight: appBarHeight,
       ),
-      body: TableCalendar(
-        calendarController: _calendarController,
-        locale: 'ru_RU',
-        startingDayOfWeek: StartingDayOfWeek.monday,
-        availableCalendarFormats: {
-          CalendarFormat.week: 'Неделя',
-          CalendarFormat.twoWeeks: '2 недели',
-          CalendarFormat.month: 'Месяц',
-        },
+      body: Column(
+        children: [
+          TableCalendar(
+            calendarController: _calendarController,
+            locale: 'ru_RU',
+            startingDayOfWeek: StartingDayOfWeek.monday,
+            availableCalendarFormats: {
+              CalendarFormat.week: weekTitle,
+              CalendarFormat.twoWeeks: twoWeeksTitle,
+              CalendarFormat.month: monthTitle,
+            },
+          ),
+          Expanded(
+            child: ListView(
+              controller: _scrollController,
+              children: context.watch<CurrentDay>().deedsOfDayByHour.entries.map((e) => HourStrip(e.key)).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
