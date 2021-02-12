@@ -62,12 +62,15 @@ class _LoginState extends State<Login> {
                       if (_loginController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
                         setState(() => (_isLoading = true));
                         String error = await _currentUser.login(_loginController.text, _passwordController.text);
-                        if (error.isNotEmpty) _showMessage(context, error);
+                        if (error.isNotEmpty) {
+                          _showMessage(context, error);
+                        } else {
+                          Navigator.pushAndRemoveUntil(
+                              context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())), (_) => false);
+                        }
                       } else {
                         _showMessage(context, loginAndPassEmpty);
                       }
-                      Navigator.pushAndRemoveUntil(
-                          context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())), (_) => false);
                     },
                   ),
                   const SizedBox(height: 20),
@@ -76,9 +79,12 @@ class _LoginState extends State<Login> {
                     onPressed: () async {
                       setState(() => (_isLoading = true));
                       String error = await _currentUser.googleLogin();
-                      if (error.isNotEmpty) _showMessage(context, error);
-                      Navigator.pushAndRemoveUntil(
-                          context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())), (_) => false);
+                      if (error.isNotEmpty) {
+                        _showMessage(context, error);
+                      } else {
+                        Navigator.pushAndRemoveUntil(
+                            context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())), (_) => false);
+                      }
                     },
                   ),
                   const SizedBox(height: 10),

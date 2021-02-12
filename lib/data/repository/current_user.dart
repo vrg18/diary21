@@ -35,7 +35,7 @@ class CurrentUser {
 
   Future<String> googleLogin() async {
     try {
-      GoogleSignInAccount user = (await _googleSignIn.signIn());
+      GoogleSignInAccount user = await _googleSignIn.signIn();
       GoogleSignInAuthentication googleSignInAuthentication = await user.authentication;
       print(googleSignInAuthentication.accessToken);
       var response = await _dioAuth.post(

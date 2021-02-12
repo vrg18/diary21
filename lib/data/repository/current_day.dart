@@ -5,7 +5,7 @@ import 'package:diary/domain/deed.dart';
 class CurrentDay {
   late DateTime _currentDay;
   late List<Deed> _deedsOfDay;
-  Map<int, List<Deed>> _deedsOfDayByHour = {
+  final Map<int, List<Deed>> _deedsOfDayByHour = {
     0: [],
     1: [],
     2: [],
