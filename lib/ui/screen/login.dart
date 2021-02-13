@@ -1,3 +1,4 @@
+import 'package:diary/data/repository/current_day.dart';
 import 'package:diary/data/repository/current_user.dart';
 import 'package:diary/ui/res/sizes.dart';
 import 'package:diary/ui/res/strings.dart';
@@ -65,6 +66,7 @@ class _LoginState extends State<Login> {
                         if (error.isNotEmpty) {
                           _showMessage(context, error);
                         } else {
+                          context.read<CurrentDay>().initDeedStorage(_currentUser.user.token);
                           Navigator.pushAndRemoveUntil(
                               context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())), (_) => false);
                         }
@@ -82,6 +84,7 @@ class _LoginState extends State<Login> {
                       if (error.isNotEmpty) {
                         _showMessage(context, error);
                       } else {
+                        context.read<CurrentDay>().initDeedStorage(_currentUser.user.token);
                         Navigator.pushAndRemoveUntil(
                             context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())), (_) => false);
                       }

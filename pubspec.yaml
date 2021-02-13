@@ -19,6 +19,7 @@ dependencies:
   dio: ^3.0.10
   google_sign_in: ^4.5.9
   table_calendar: ^2.3.3
+  postgrest: ^0.0.5
 
 dev_dependencies:
   flutter_test:

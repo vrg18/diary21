@@ -1,10 +1,12 @@
+import 'package:diary/data/storage/deed_storage.dart';
 import 'package:diary/domain/deed.dart';
 
 /// Бизнес-логика событий выбранного дня
 /// Используется Provider
 class CurrentDay {
-  late DateTime _currentDay;
-  late List<Deed> _deedsOfDay;
+//  late DateTime _currentDay;
+  late DeedStorage _deedStorage;
+//  late List<Deed> _deedsOfDay;
   final Map<int, List<Deed>> _deedsOfDayByHour = {
     0: [],
     1: [],
@@ -32,18 +34,23 @@ class CurrentDay {
     23: [],
   };
 
-  CurrentDay() {
-    var _now = new DateTime.now();
-    _currentDay = new DateTime(_now.year, _now.month, _now.day);
-    _getDeedsOfDayByHour();
-  }
+  // CurrentDay() {
+  //   var _now = DateTime.now();
+  //   _currentDay = DateTime(_now.year, _now.month, _now.day);
+  // }
 
   Map<int, List<Deed>> get deedsOfDayByHour => _deedsOfDayByHour;
 
-  _getDeedsOfDayByHour() {
-    _deedsOfDay = []; // todo взять из базы
+  void initDeedStorage(String token) {
+    _deedStorage = DeedStorage(token);
+  }
+
+  Future<Map<int, List<Deed>>> getDeedsOfDayByHour(DateTime day) async {
+    var dayWithoutHours = DateTime(day.year, day.month, day.day);
+    var deedsOfDay = await _deedStorage.readDeedsOfDay(dayWithoutHours);
+//    List<Deed> deedsOfDay = [];
     _deedsOfDayByHour.forEach((key, value) => value.clear());
-    _deedsOfDay.forEach((element) => _deedsOfDayByHour[element.dateStart.hour]!.add(element));
+    deedsOfDay.forEach((element) => _deedsOfDayByHour[element.dateStart.hour]!.add(element));
     return _deedsOfDayByHour;
   }
 }

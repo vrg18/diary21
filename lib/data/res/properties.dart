@@ -10,4 +10,4 @@ const String affairsDB = '/affairs';
 const String googleIn = '/provider/google';
 const String googleState = 'f80d3bb3fda548039743f0d460237aba';
 const String goodleAuthApi = 'https://www.googleapis.com/auth/contacts.readonly';
-
+const String tableName = 'diary_deeds';

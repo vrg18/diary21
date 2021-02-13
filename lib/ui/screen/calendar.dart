@@ -1,5 +1,6 @@
 import 'package:diary/data/repository/current_day.dart';
 import 'package:diary/data/repository/current_user.dart';
+import 'package:diary/domain/deed.dart';
 import 'package:diary/ui/res/sizes.dart';
 import 'package:diary/ui/res/strings.dart';
 import 'package:diary/ui/screen/hour_strip.dart';
@@ -15,12 +16,15 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   late CalendarController _calendarController;
   late ScrollController _scrollController;
+  late Map<int, List<Deed>> _deedsOfDayByHour;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
     _calendarController = CalendarController();
+//    _calendarController.focusedDay = DateTime.now();
     _scrollController = ScrollController(initialScrollOffset: startingOffsetOfListOfHourStripes);
+    _deedsOfDayByHour = await context.watch<CurrentDay>().getDeedsOfDayByHour(DateTime.now());
   }
 
   @override
@@ -58,7 +62,7 @@ class _CalendarState extends State<Calendar> {
           Expanded(
             child: ListView(
               controller: _scrollController,
-              children: context.watch<CurrentDay>().deedsOfDayByHour.entries.map((e) => HourStrip(e.key)).toList(),
+              children: _deedsOfDayByHour.entries.map((e) => HourStrip(e.key)).toList(),
             ),
           ),
         ],
