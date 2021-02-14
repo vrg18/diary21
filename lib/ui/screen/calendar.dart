@@ -1,6 +1,5 @@
 import 'package:diary/data/repository/current_day.dart';
 import 'package:diary/data/repository/current_user.dart';
-import 'package:diary/domain/deed.dart';
 import 'package:diary/ui/res/sizes.dart';
 import 'package:diary/ui/res/strings.dart';
 import 'package:diary/ui/screen/hour_strip.dart';
@@ -33,7 +32,6 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //todo Provider.of<CurrentUser>(context, listen: false).user.email)),
       appBar: AppBar(
         toolbarHeight: appBarHeight,
         title: Align(
@@ -59,13 +57,23 @@ class _CalendarState extends State<Calendar> {
               CalendarFormat.twoWeeks: twoWeeksTitle,
               CalendarFormat.month: monthTitle,
             },
-            onDaySelected: (day, _, __) {context.read<CurrentDay>().readDeedsOfDayByHour(day);},
+            onDaySelected: (day, _, __) {
+              context.read<CurrentDay>().readDeedsOfDayByHour(day);
+            },
           ),
           Expanded(
             child: ListView(
               controller: _scrollController,
-              children:
-                  context.watch<CurrentDay>().deedsOfDayByHour.entries.map((e) => HourStrip(e.key, e.value)).toList(),
+              children: context
+                  .watch<CurrentDay>()
+                  .deedsOfDayByHour
+                  .entries
+                  .map((e) => HourStrip(
+                        e.key,
+                        e.value,
+                        _calendarController.selectedDay,
+                      ))
+                  .toList(),
             ),
           ),
         ],

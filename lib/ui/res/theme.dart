@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 /// Темы приложения
 
 final mainTheme = ThemeData(
-  primaryColor: primaryAppColor,
-  accentColor: Colors.indigo,
-  scaffoldBackgroundColor: primaryBackgroundColor,
-  backgroundColor: primaryBackgroundColor,
-  primarySwatch: Colors.indigo,
-  buttonTheme: ButtonThemeData(
-    buttonColor: appButtonColor,
-    textTheme: ButtonTextTheme.primary,
-  ),
-);
+    primaryColor: primaryAppColor,
+    accentColor: Colors.indigo,
+    scaffoldBackgroundColor: primaryBackgroundColor,
+    backgroundColor: primaryBackgroundColor,
+    primarySwatch: Colors.indigo,
+    buttonTheme: ButtonThemeData(
+      buttonColor: appButtonColor,
+      textTheme: ButtonTextTheme.primary,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: TextStyle(fontSize: 14),
+    ));

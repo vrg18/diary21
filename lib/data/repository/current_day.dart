@@ -38,6 +38,8 @@ class CurrentDay with ChangeNotifier {
 
   bool get isLoadingNow => _isLoadingNow;
 
+  DeedStorage get deedStorage => _deedStorage;
+
   void initDeedStorage(String token) {
     _deedStorage = DeedStorage(token);
     readDeedsOfDayByHour(DateTime.now());

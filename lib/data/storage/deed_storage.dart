@@ -22,15 +22,31 @@ class DeedStorage {
     if (response.error == null) {
       return response.data.map((element) {
         return Deed(
-          idS: element['id'],
+          id: element['id'],
           dateStart: DateTime.parse(element['date_start']),
-          dateFinish: DateTime.parse(element['date_finish']),
+          dateFinish: element['date_finish'] != null ? DateTime.parse(element['date_finish']) : null,
           name: element['name'],
           description: element['description'],
         );
       }).toList();
     } else {
       return [];
+    }
+  }
+
+  dynamic createNewDeed(Deed newDeed) async {
+    var response = await _client.from(tableName).insert([
+      {
+        'date_start': newDeed.dateStart.toIso8601String(),
+        'date_finish': newDeed.dateFinish != null ? newDeed.dateFinish!.toIso8601String() : null,
+        'name': newDeed.name,
+        'description': newDeed.description,
+      }
+    ]).execute();
+    if (response.error != null) {
+      return response.statusText;
+    } else {
+      return '';
     }
   }
 }

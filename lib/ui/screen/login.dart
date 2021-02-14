@@ -44,9 +44,8 @@ class _LoginState extends State<Login> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: basicBorderSize),
               child: Column(
-//                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Spacer(flex: 1),
+                  Spacer(),
                   Expanded(
                     flex: 2,
                     child: AspectRatio(
@@ -55,20 +54,18 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(8),
                         child: SizedBox.expand(
                           child: Image.asset(
-                            'lib/ui/res/21_large.jpg',
+                            largePicture,
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  Spacer(flex: 1),
-//                  Expanded(child: Text(greetingString, style: TextStyle(fontSize: 20))),
-//                  const SizedBox(height: 20),
+                  Spacer(),
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: 30),
+                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
                         child: TextField(
                           controller: _loginController,
                           decoration: InputDecoration(
@@ -82,7 +79,7 @@ class _LoginState extends State<Login> {
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: 30),
+                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
                         child: TextField(
                           controller: _passwordController,
                           obscureText: true,
@@ -94,11 +91,10 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-//                  const SizedBox(height: 25),
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: 30),
+                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
                         child: RaisedButton(
                           child: Text(loginPress),
                           onPressed: () async {
@@ -120,11 +116,10 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-//                  const SizedBox(height: 20),
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: 30),
+                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
                         child: RaisedButton(
                           child: Text(loginGooglePress),
                           onPressed: () async {
@@ -142,34 +137,43 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-//                  const SizedBox(height: 10),
                   Expanded(
-                    child: FlatButton(
-                      child: Text(loginCreatePress),
-                      onPressed: () async {
-                        if (_loginController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
-                          setState(() => (_isLoading = true));
-                          String message =
-                              await currentUser.createLogin(_loginController.text, _passwordController.text);
-                          if (message.isNotEmpty) _showMessage(context, message);
-                        } else {
-                          _showMessage(context, loginAndPassEmpty);
-                        }
-                      },
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
+                        child: FlatButton(
+                          child: Text(loginCreatePress),
+                          onPressed: () async {
+                            if (_loginController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
+                              setState(() => (_isLoading = true));
+                              String message =
+                                  await currentUser.createLogin(_loginController.text, _passwordController.text);
+                              if (message.isNotEmpty) _showMessage(context, message);
+                            } else {
+                              _showMessage(context, loginAndPassEmpty);
+                            }
+                          },
+                        ),
+                      ),
                     ),
                   ),
                   Expanded(
-                    child: FlatButton(
-                      child: Text(loginForgotPress),
-                      onPressed: () async {
-                        if (_loginController.text.isNotEmpty) {
-                          setState(() => (_isLoading = true));
-                          String message = await currentUser.forgotLogin(_loginController.text);
-                          if (message.isNotEmpty) _showMessage(context, message);
-                        } else {
-                          _showMessage(context, loginEmpty);
-                        }
-                      },
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
+                        child: FlatButton(
+                          child: Text(loginForgotPress),
+                          onPressed: () async {
+                            if (_loginController.text.isNotEmpty) {
+                              setState(() => (_isLoading = true));
+                              String message = await currentUser.forgotLogin(_loginController.text);
+                              if (message.isNotEmpty) _showMessage(context, message);
+                            } else {
+                              _showMessage(context, loginEmpty);
+                            }
+                          },
+                        ),
+                      ),
                     ),
                   ),
                   Spacer(flex: 2),

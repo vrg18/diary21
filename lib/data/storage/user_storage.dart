@@ -32,7 +32,7 @@ class UserStorage {
     try {
       GoogleSignInAccount user = await _googleSignIn.signIn();
       GoogleSignInAuthentication googleSignInAuthentication = await user.authentication;
-      print(googleSignInAuthentication.accessToken);
+//      print(googleSignInAuthentication.accessToken);
       var response = await _dioAuth.post(
         googleIn,
         data: {
@@ -80,7 +80,7 @@ class UserStorage {
   }
 
   dynamic _authContinueOk(response, isLogin) {
-    print('Ответ: ${response.statusCode}/${response.statusMessage}, Содержимое: ${response.data}');
+//    print('Ответ: ${response.statusCode}/${response.statusMessage}, Содержимое: ${response.data}');
     if (response.statusCode < 300) {
       if (isLogin) {
         return User(
@@ -92,13 +92,11 @@ class UserStorage {
         return '';
       }
     } else {
-//      print('Сообщение: ${response.statusMessage}');
       return response.statusMessage;
     }
   }
 
   String _authContinueException(error) {
-//    print('Ошибка: $error');
     if (error is DioError) {
       if (error.response.data.containsKey('message')) {
         return error.response.data['message'];

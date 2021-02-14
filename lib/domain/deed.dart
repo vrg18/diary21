@@ -1,12 +1,13 @@
 /// сущьность Дело
 class Deed {
-  final String? idS;
+  final String? id;
   final DateTime dateStart;
   final DateTime? dateFinish;
   final String name;
   final String? description;
 
-  Deed({this.idS,
+  Deed({
+    this.id,
     required this.dateStart,
     this.dateFinish,
     required this.name,

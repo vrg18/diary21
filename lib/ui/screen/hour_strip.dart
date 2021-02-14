@@ -1,6 +1,8 @@
 import 'package:diary/domain/deed.dart';
 import 'package:diary/ui/res/colors.dart';
 import 'package:diary/ui/res/sizes.dart';
+import 'package:diary/ui/screen/details.dart';
+import 'package:diary/ui/screen/shell_screens.dart';
 import 'package:diary/ui/screen/small_deed_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,8 +11,9 @@ class HourStrip extends StatelessWidget {
   final DateFormat _formatter = DateFormat.Hm();
   late DateTime _time;
   late List<Deed> _deedsOfHour;
+  late DateTime _selectedDay;
 
-  HourStrip(int hour, this._deedsOfHour) {
+  HourStrip(int hour, this._deedsOfHour, this._selectedDay) {
     this._time = DateTime(0, 0, 0, hour, 0, 0, 0, 0);
   }
 
@@ -41,17 +44,23 @@ class HourStrip extends StatelessWidget {
                 ],
               ),
               Positioned(
-                right: -4,
-                top: -4,
+                right: -6,
+                top: -5,
                 child: IconButton(
                   iconSize: hourStripHeight / 1.5,
                   icon: Icon(
                     Icons.add_circle_outline,
                   ),
                   color: darkAppColor,
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ShellScreens(Details(
+                          newDeedStartDate: DateTime(
+                              _selectedDay.year, _selectedDay.month, _selectedDay.day, _time.hour, 0, 0, 0, 0))),
+                    ),
+                  ),
                 ),
-                // ),
               ),
             ],
           ),

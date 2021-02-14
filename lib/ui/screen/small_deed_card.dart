@@ -1,6 +1,9 @@
 import 'package:diary/data/repository/deed_briefly.dart';
 import 'package:diary/domain/deed.dart';
 import 'package:diary/ui/res/colors.dart';
+import 'package:diary/ui/res/strings.dart';
+import 'package:diary/ui/screen/details.dart';
+import 'package:diary/ui/screen/shell_screens.dart';
 import 'package:flutter/material.dart';
 
 class SmallDeedCard extends StatelessWidget {
@@ -25,18 +28,8 @@ class SmallDeedCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(3),
                     child: SizedBox.expand(
                       child: Image.asset(
-                        'lib/ui/res/21_little.jpg',
+                        smallPicture,
                         fit: BoxFit.cover,
-                        // loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                        //   if (loadingProgress == null) return child;
-                        //   return Center(
-                        //     child: CircularProgressIndicator(
-                        //       value: loadingProgress.expectedTotalBytes != null
-                        //           ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                        //           : null,
-                        //     ),
-                        //   );
-                        // },
                       ),
                     ),
                   ),
@@ -50,7 +43,8 @@ class SmallDeedCard extends StatelessWidget {
             ),
             Positioned.fill(
               child: MaterialButton(
-                onPressed: () => {},//Navigator.push(context, MaterialPageRoute(builder: (_) => SightDetail(_sight))),
+                onPressed: () =>
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => ShellScreens(Details(deed: _deed)))),
               ),
             ),
           ],

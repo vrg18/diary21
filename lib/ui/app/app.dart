@@ -3,7 +3,6 @@ import 'package:diary/data/repository/current_user.dart';
 import 'package:diary/data/repository/is_web.dart';
 import 'package:diary/ui/res/strings.dart';
 import 'package:diary/ui/res/theme.dart';
-import 'package:diary/ui/screen/calendar.dart';
 import 'package:diary/ui/screen/login.dart';
 import 'package:diary/ui/screen/shell_screens.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +24,6 @@ class MyApp extends StatelessWidget {
         theme: mainTheme,
         home: Builder(
           builder: (_) => ShellScreens(Login()),
-//        builder: (_) => ShellScreens(Calendar()),
         ),
       ),
     );
