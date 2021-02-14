@@ -3,24 +3,32 @@ import 'package:diary/domain/deed.dart';
 import 'package:postgrest/postgrest.dart';
 
 class DeedStorage {
-  final String _token;
   late PostgrestClient _client;
 
-  DeedStorage(this._token) {
+  DeedStorage(token) {
     _client = PostgrestClient(
       urlData,
-    ).auth(_token);
+    ).auth(token);
   }
 
-  Future<List<Deed>> readDeedsOfDay(DateTime day) async {
+  dynamic readDeedsOfPeriod(DateTime startDay, DateTime finishDay) async {
     var response = await _client
         .from(tableName)
         .select()
+        .or('and(date_start.gte.$startDay},date_start.lt.$finishDay)')
         .order('date_start', ascending: true)
         .order('date_finish', ascending: true)
         .execute();
     if (response.error == null) {
-      return response.data;
+      return response.data.map((element) {
+        return Deed(
+          idS: element['id'],
+          dateStart: DateTime.parse(element['date_start']),
+          dateFinish: DateTime.parse(element['date_finish']),
+          name: element['name'],
+          description: element['description'],
+        );
+      }).toList();
     } else {
       return [];
     }

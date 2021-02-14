@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<Web>(create: (_) => Web()),
         Provider<CurrentUser>(create: (_) => CurrentUser()),
-        Provider<CurrentDay>(create: (_) => CurrentDay()),
+        ChangeNotifierProvider<CurrentDay>(create: (_) => CurrentDay()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

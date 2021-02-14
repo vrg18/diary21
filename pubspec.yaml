@@ -27,3 +27,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - lib/ui/res/21_little.jpg
+    - lib/ui/res/21_large.jpg

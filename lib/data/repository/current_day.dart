@@ -1,12 +1,12 @@
 import 'package:diary/data/storage/deed_storage.dart';
 import 'package:diary/domain/deed.dart';
+import 'package:flutter/material.dart';
 
 /// Бизнес-логика событий выбранного дня
 /// Используется Provider
-class CurrentDay {
-//  late DateTime _currentDay;
+class CurrentDay with ChangeNotifier {
   late DeedStorage _deedStorage;
-//  late List<Deed> _deedsOfDay;
+  bool _isLoadingNow = false;
   final Map<int, List<Deed>> _deedsOfDayByHour = {
     0: [],
     1: [],
@@ -34,23 +34,24 @@ class CurrentDay {
     23: [],
   };
 
-  // CurrentDay() {
-  //   var _now = DateTime.now();
-  //   _currentDay = DateTime(_now.year, _now.month, _now.day);
-  // }
-
   Map<int, List<Deed>> get deedsOfDayByHour => _deedsOfDayByHour;
+
+  bool get isLoadingNow => _isLoadingNow;
 
   void initDeedStorage(String token) {
     _deedStorage = DeedStorage(token);
+    readDeedsOfDayByHour(DateTime.now());
   }
 
-  Future<Map<int, List<Deed>>> getDeedsOfDayByHour(DateTime day) async {
-    var dayWithoutHours = DateTime(day.year, day.month, day.day);
-    var deedsOfDay = await _deedStorage.readDeedsOfDay(dayWithoutHours);
-//    List<Deed> deedsOfDay = [];
+  Future<void> readDeedsOfDayByHour(DateTime day) async {
+    _isLoadingNow = true;
+    notifyListeners();
+    var startOfDay = DateTime(day.year, day.month, day.day);
+    var startOfNextDay = DateTime(day.year, day.month, day.day + 1);
     _deedsOfDayByHour.forEach((key, value) => value.clear());
-    deedsOfDay.forEach((element) => _deedsOfDayByHour[element.dateStart.hour]!.add(element));
-    return _deedsOfDayByHour;
+    dynamic deeds = await _deedStorage.readDeedsOfPeriod(startOfDay, startOfNextDay);
+    deeds.forEach((element) => _deedsOfDayByHour[element.dateStart.hour]!.add(element));
+    _isLoadingNow = false;
+    notifyListeners();
   }
 }

@@ -16,15 +16,12 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   late CalendarController _calendarController;
   late ScrollController _scrollController;
-  late Map<int, List<Deed>> _deedsOfDayByHour;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
     _calendarController = CalendarController();
-//    _calendarController.focusedDay = DateTime.now();
     _scrollController = ScrollController(initialScrollOffset: startingOffsetOfListOfHourStripes);
-    _deedsOfDayByHour = await context.watch<CurrentDay>().getDeedsOfDayByHour(DateTime.now());
   }
 
   @override
@@ -38,6 +35,7 @@ class _CalendarState extends State<Calendar> {
     return Scaffold(
       //todo Provider.of<CurrentUser>(context, listen: false).user.email)),
       appBar: AppBar(
+        toolbarHeight: appBarHeight,
         title: Align(
           alignment: Alignment.centerRight,
           child: Text(
@@ -45,10 +43,13 @@ class _CalendarState extends State<Calendar> {
             style: TextStyle(fontSize: 12),
           ),
         ),
-        toolbarHeight: appBarHeight,
       ),
       body: Column(
         children: [
+          Container(
+            height: 2,
+            child: context.watch<CurrentDay>().isLoadingNow ? LinearProgressIndicator() : null,
+          ),
           TableCalendar(
             calendarController: _calendarController,
             locale: 'ru_RU',
@@ -58,11 +59,13 @@ class _CalendarState extends State<Calendar> {
               CalendarFormat.twoWeeks: twoWeeksTitle,
               CalendarFormat.month: monthTitle,
             },
+            onDaySelected: (day, _, __) {context.read<CurrentDay>().readDeedsOfDayByHour(day);},
           ),
           Expanded(
             child: ListView(
               controller: _scrollController,
-              children: _deedsOfDayByHour.entries.map((e) => HourStrip(e.key)).toList(),
+              children:
+                  context.watch<CurrentDay>().deedsOfDayByHour.entries.map((e) => HourStrip(e.key, e.value)).toList(),
             ),
           ),
         ],
