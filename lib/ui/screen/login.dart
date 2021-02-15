@@ -105,8 +105,8 @@ class _LoginState extends State<Login> {
                                 _showMessage(context, error);
                               } else {
                                 context.read<CurrentDay>().initDeedStorage(currentUser.user.token);
-                                Navigator.pushAndRemoveUntil(
-                                    context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())), (_) => false);
+                                Navigator.pushReplacement(
+                                    context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())));
                               }
                             } else {
                               _showMessage(context, loginAndPassEmpty);
@@ -129,8 +129,8 @@ class _LoginState extends State<Login> {
                               _showMessage(context, error);
                             } else {
                               context.read<CurrentDay>().initDeedStorage(currentUser.user.token);
-                              Navigator.pushAndRemoveUntil(
-                                  context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())), (_) => false);
+                              Navigator.pushReplacement(
+                                  context, MaterialPageRoute(builder: (_) => ShellScreens(Calendar())));
                             }
                           },
                         ),
@@ -141,7 +141,7 @@ class _LoginState extends State<Login> {
                     child: Center(
                       child: ConstrainedBox(
                         constraints: BoxConstraints(maxHeight: heightOfButtons),
-                        child: FlatButton(
+                        child: TextButton(
                           child: Text(loginCreatePress),
                           onPressed: () async {
                             if (_loginController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
@@ -161,7 +161,7 @@ class _LoginState extends State<Login> {
                     child: Center(
                       child: ConstrainedBox(
                         constraints: BoxConstraints(maxHeight: heightOfButtons),
-                        child: FlatButton(
+                        child: TextButton(
                           child: Text(loginForgotPress),
                           onPressed: () async {
                             if (_loginController.text.isNotEmpty) {
@@ -183,7 +183,7 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
-      floatingActionButton: FlatButton(
+      floatingActionButton: TextButton(
         child: Text(
           fillWithTestUserData,
           textAlign: TextAlign.center,

@@ -2,8 +2,8 @@
 
 const String appTitle = 'Ежедневник';
 const String greetingString = 'Ваш персональный Ежедневник';
-const String loginHint = 'e-mail  ⃰';
-const String passwordHint = 'пароль ⃰';
+const String loginHint = 'e-mail';
+const String passwordHint = 'пароль';
 const String loginPress = 'Вход';
 const String loginGooglePress = 'Вход с Google';
 const String loginCreatePress = 'Создать аккаунт';
@@ -18,10 +18,10 @@ const String passwordResetRequest = 'Вам отправлен запрос на
 const String weekTitle = 'Неделя';
 const String twoWeeksTitle = '2 недели';
 const String monthTitle = 'Месяц';
-const String dateHint = 'дата ⃰';
-const String timeStartHint = 'старт ⃰';
+const String dateHint = 'дата';
+const String timeStartHint = 'старт';
 const String timeFinishHint = 'финиш';
-const String deedNameHint = 'название дела ⃰';
+const String deedNameHint = 'название дела';
 const String deedDescriptionHint = 'подробности дела';
 const String createPress = 'Создать';
 const String closePress = 'Закрыть';
