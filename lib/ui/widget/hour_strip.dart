@@ -3,7 +3,7 @@ import 'package:diary/ui/res/colors.dart';
 import 'package:diary/ui/res/sizes.dart';
 import 'package:diary/ui/screen/details.dart';
 import 'package:diary/ui/screen/shell_screens.dart';
-import 'package:diary/ui/screen/small_deed_card.dart';
+import 'package:diary/ui/widget/small_deed_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

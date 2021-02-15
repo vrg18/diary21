@@ -73,7 +73,7 @@ class Details extends StatelessWidget {
               //child:
               child: Center(
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
+                  constraints: BoxConstraints(maxHeight: heightOfTextFields),
                   child: Row(
                     children: [
                       Expanded(
@@ -83,7 +83,7 @@ class Details extends StatelessWidget {
                           controller: _dateController,
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
-                            hintText: timeStartHint,
+                            labelText: timeStartHint,
                             icon: Icon(Icons.timer),
                           ),
                         ),
@@ -96,7 +96,7 @@ class Details extends StatelessWidget {
                           controller: _timeStartController,
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
-                            hintText: timeStartHint,
+                            labelText: timeStartHint,
                           ),
                         ),
                       ),
@@ -108,7 +108,7 @@ class Details extends StatelessWidget {
                           controller: _timeFinishController,
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
-                            hintText: timeFinishHint,
+                            labelText: timeFinishHint,
                           ),
                         ),
                       ),
@@ -120,12 +120,12 @@ class Details extends StatelessWidget {
             Expanded(
               child: Center(
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
+                  constraints: BoxConstraints(maxHeight: heightOfTextFields),
                   child: TextField(
                     readOnly: _readOnly,
                     controller: _nameController,
                     decoration: InputDecoration(
-                      hintText: deedNameHint,
+                      labelText: deedNameHint,
                       icon: Icon(Icons.assignment_late_outlined),
                     ),
                   ),
@@ -141,7 +141,7 @@ class Details extends StatelessWidget {
                 minLines: 4,
                 maxLines: 8,
                 decoration: InputDecoration(
-                  hintText: deedDescriptionHint,
+                  labelText: deedDescriptionHint,
                   icon: Icon(Icons.assignment_outlined),
                 ),
               ),
@@ -150,8 +150,8 @@ class Details extends StatelessWidget {
             Expanded(
               child: Center(
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
-                  child: RaisedButton(
+                  constraints: BoxConstraints(maxHeight: heightOfButtons),
+                  child: ElevatedButton(
                     child: Text(_readOnly ? closePress : createPress),
                     onPressed: () {
                       if (_readOnly)

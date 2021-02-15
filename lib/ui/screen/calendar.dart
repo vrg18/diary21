@@ -2,7 +2,7 @@ import 'package:diary/data/repository/current_day.dart';
 import 'package:diary/data/repository/current_user.dart';
 import 'package:diary/ui/res/sizes.dart';
 import 'package:diary/ui/res/strings.dart';
-import 'package:diary/ui/screen/hour_strip.dart';
+import 'package:diary/ui/widget/hour_strip.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';

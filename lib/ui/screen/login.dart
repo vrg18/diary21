@@ -65,11 +65,11 @@ class _LoginState extends State<Login> {
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
+                        constraints: BoxConstraints(maxHeight: heightOfTextFields),
                         child: TextField(
                           controller: _loginController,
                           decoration: InputDecoration(
-                            hintText: loginHint,
+                            labelText: loginHint,
                             icon: Icon(Icons.mail),
                           ),
                         ),
@@ -79,12 +79,12 @@ class _LoginState extends State<Login> {
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
+                        constraints: BoxConstraints(maxHeight: heightOfTextFields),
                         child: TextField(
                           controller: _passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
-                            hintText: passwordHint,
+                            labelText: passwordHint,
                             icon: Icon(Icons.lock),
                           ),
                         ),
@@ -94,8 +94,8 @@ class _LoginState extends State<Login> {
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
-                        child: RaisedButton(
+                        constraints: BoxConstraints(maxHeight: heightOfButtons),
+                        child: ElevatedButton(
                           child: Text(loginPress),
                           onPressed: () async {
                             if (_loginController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
@@ -119,8 +119,8 @@ class _LoginState extends State<Login> {
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
-                        child: RaisedButton(
+                        constraints: BoxConstraints(maxHeight: heightOfButtons),
+                        child: ElevatedButton(
                           child: Text(loginGooglePress),
                           onPressed: () async {
                             setState(() => (_isLoading = true));
@@ -140,7 +140,7 @@ class _LoginState extends State<Login> {
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
+                        constraints: BoxConstraints(maxHeight: heightOfButtons),
                         child: FlatButton(
                           child: Text(loginCreatePress),
                           onPressed: () async {
@@ -160,7 +160,7 @@ class _LoginState extends State<Login> {
                   Expanded(
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: heightOfTextFieldsAndButtons),
+                        constraints: BoxConstraints(maxHeight: heightOfButtons),
                         child: FlatButton(
                           child: Text(loginForgotPress),
                           onPressed: () async {
