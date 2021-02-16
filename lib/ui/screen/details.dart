@@ -83,7 +83,7 @@ class Details extends StatelessWidget {
                           controller: _dateController,
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
-                            labelText: timeStartHint,
+                            labelText: dateHint,
                             icon: Icon(Icons.timer),
                           ),
                         ),
