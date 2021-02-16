@@ -27,5 +27,5 @@ const String createPress = 'Создать';
 const String closePress = 'Закрыть';
 const String errorNotEnoughData = 'Не хватает данных для создания дела';
 
-const String largePicture = 'lib/ui/res/21_large.jpg';
-const String smallPicture = 'lib/ui/res/21_little.jpg';
+const String largePicture = 'lib/ui/res/candles_21_640x640.jpg';
+const String smallPicture = 'lib/ui/res/candles_21_192x192.png';
