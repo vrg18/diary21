@@ -44,7 +44,7 @@ class DeedStorage {
       }
     ]).execute();
     if (response.error != null) {
-      return response.statusText;
+      return response.error!.message;
     } else {
       return '';
     }

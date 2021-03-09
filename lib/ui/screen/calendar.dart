@@ -1,5 +1,6 @@
 import 'package:diary/data/repository/current_day.dart';
 import 'package:diary/data/repository/current_user.dart';
+import 'package:diary/ui/res/colors.dart';
 import 'package:diary/ui/res/sizes.dart';
 import 'package:diary/ui/res/strings.dart';
 import 'package:diary/ui/widget/hour_strip.dart';
@@ -13,19 +14,23 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  late CalendarController _calendarController;
+  late DateTime _selectedDay;
+  late DateTime _focusedDay;
+  late CalendarFormat _calendarFormat;
   late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    _calendarController = CalendarController();
+    _selectedDay = DateTime.now();
+    _focusedDay = DateTime.now();
+    _calendarFormat = CalendarFormat.month;
     _scrollController = ScrollController(initialScrollOffset: startingOffsetOfListOfHourStripes);
   }
 
   @override
   void dispose() {
-    _calendarController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -49,16 +54,34 @@ class _CalendarState extends State<Calendar> {
             child: context.watch<CurrentDay>().isLoadingNow ? LinearProgressIndicator() : null,
           ),
           TableCalendar(
-            calendarController: _calendarController,
+            firstDay: DateTime.utc(2010, 10, 16),
+            lastDay: DateTime.utc(2030, 3, 14),
+            focusedDay: _focusedDay,
             locale: 'ru_RU',
             startingDayOfWeek: StartingDayOfWeek.monday,
+            daysOfWeekStyle: DaysOfWeekStyle(
+              weekendStyle: TextStyle(color: weekendColor),
+            ),
+            calendarStyle: CalendarStyle(
+              weekendTextStyle: TextStyle(color: weekendColor),
+            ),
             availableCalendarFormats: {
-              CalendarFormat.week: weekTitle,
-              CalendarFormat.twoWeeks: twoWeeksTitle,
               CalendarFormat.month: monthTitle,
+              CalendarFormat.twoWeeks: twoWeeksTitle,
+              CalendarFormat.week: weekTitle,
             },
-            onDaySelected: (day, _, __) {
-              context.read<CurrentDay>().readDeedsOfDayByHour(day);
+            selectedDayPredicate: (day) => _selectedDay == day,
+            onDaySelected: (selectedDay, focusedDay) => setState(() {
+              _selectedDay = selectedDay;
+              _focusedDay = focusedDay;
+              context.read<CurrentDay>().readDeedsOfDayByHour(selectedDay);
+            }),
+            onPageChanged: (focusedDay) => _focusedDay = focusedDay,
+            calendarFormat: _calendarFormat,
+            onFormatChanged: (format) {
+              setState(() {
+                _calendarFormat = format;
+              });
             },
           ),
           Expanded(
@@ -68,11 +91,7 @@ class _CalendarState extends State<Calendar> {
                   .watch<CurrentDay>()
                   .deedsOfDayByHour
                   .entries
-                  .map((e) => HourStrip(
-                        e.key,
-                        e.value,
-                        _calendarController.selectedDay,
-                      ))
+                  .map((e) => HourStrip(e.key, e.value, _selectedDay))
                   .toList(),
             ),
           ),

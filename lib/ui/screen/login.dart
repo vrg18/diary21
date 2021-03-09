@@ -204,6 +204,7 @@ class _LoginState extends State<Login> {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
+//        print(content);
         return AlertDialog(
           title: Text('Warning'),
           content: Text(content),

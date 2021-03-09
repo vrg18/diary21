@@ -30,7 +30,7 @@ class UserStorage {
 
   dynamic googleLogin() async {
     try {
-      GoogleSignInAccount user = await _googleSignIn.signIn();
+      GoogleSignInAccount user = (await _googleSignIn.signIn())!;
       GoogleSignInAuthentication googleSignInAuthentication = await user.authentication;
 //      print(googleSignInAuthentication.accessToken);
       var response = await _dioAuth.post(
@@ -98,10 +98,10 @@ class UserStorage {
 
   String _authContinueException(error) {
     if (error is DioError) {
-      if (error.response.data.containsKey('message')) {
-        return error.response.data['message'];
+      if (error.response!.data.containsKey('message')) {
+        return error.response!.data['message'];
       } else {
-        return error.response.data;
+        return error.response!.data;
       }
     } else {
       return error.toString();
